@@ -1784,15 +1784,9 @@ static CURLcode ftp_epsv_disable(struct Curl_easy *data,
 
 static char *control_address(struct connectdata *conn)
 {
-  /* Returns the control connection IP address.
-     If a proxy tunnel is used, returns the original host name instead, because
-     the effective control connection address is the proxy address,
-     not the ftp host. */
-#ifndef CURL_DISABLE_PROXY
-  if(conn->bits.tunnel_proxy || conn->bits.socksproxy)
-    return conn->host.name;
-#endif
-  return conn->primary_ip;
+  /* Returns the control connection host name */
+
+  return conn->host.name;
 }
 
 static CURLcode ftp_state_pasv_resp(struct Curl_easy *data,
